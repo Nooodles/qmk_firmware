@@ -90,11 +90,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TAB,  KC_A,    KC_C,    KC_O,    KC_P,    KC_Z,                               KC_J,    KC_SCLN, KC_D,  OSL(_ERGOL_DEAD),KC_Y, KC_EQL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LCTL, KC_Q,    KC_S,    KC_E,    KC_N,    KC_F,                               KC_L,    KC_R,    KC_T,    KC_I,    KC_U,    KC_4,
+     KC_LSFT, KC_Q,    KC_S,    KC_E,    KC_N,    KC_F,                               KC_L,    KC_R,    KC_T,    KC_I,    KC_U,    KC_4,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LCTL, KC_W,    KC_X,    KC_6,    KC_V,    KC_B,    TO(_QWERTY),      MO(_MEDIA), S(KC_COMM),KC_H,  KC_G,    KC_M,    KC_K,    S(KC_DOT),
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                KC_LALT,LT(_ERGOL_ALT,KC_BSPC),MO(_ERGOL_SHIFT),  KC_SPC,  KC_ENT, KC_LGUI
+                                KC_LALT,LT(_ERGOL_ALT,KC_BSPC),KC_LSFT,           KC_SPC,  KC_ENT, KC_LGUI
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -129,11 +129,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ERGOL_ALT] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TRNS, M_CIRC,  KC_NUBS,S(KC_NUBS),KC_RBRC,S(KC_QUOT),                         RALT(KC_0),KC_1,  KC_BSLS, KC_4,    RALT(KC_7),KC_TRNS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TRNS, RALT(KC_4),KC_5,  KC_MINS, RALT(KC_EQL),KC_EQL,                         KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_3,   KC_TRNS,
+     KC_TRNS, RALT(KC_4),KC_5,  KC_MINS, RALT(KC_EQL),KC_EQL,                         KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_3,   RALT(KC_8),
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
     KC_TRNS,KC_TRNS,RALT(KC_5),RALT(KC_MINS),KC_8, RALT(KC_3), RGB_VAD,     RGB_VAD,RALT(KC_6), KC_SLSH, KC_COMM, KC_M,   S(KC_M), KC_TRNS,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -191,6 +191,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 };
 
+// This globally defines all key overrides to be used
+const key_override_t *key_overrides[] = {
+    &ko_make_basic(MOD_MASK_SHIFT, S(KC_1), RALT(KC_E)),
+    &ko_make_basic(MOD_MASK_SHIFT, S(KC_2), KC_3),
+    &ko_make_basic(MOD_MASK_SHIFT, S(KC_3), KC_4),
+    &ko_make_basic(MOD_MASK_SHIFT, S(KC_4), KC_RBRC),
+    &ko_make_basic(MOD_MASK_SHIFT, S(KC_5), S(KC_QUOT)),
+    &ko_make_basic(MOD_MASK_SHIFT, S(KC_6), KC_LBRC),
+    &ko_make_basic(MOD_MASK_SHIFT, S(KC_7), KC_1),
+    &ko_make_basic(MOD_MASK_SHIFT, S(KC_8), KC_BSLS),
+    &ko_make_basic(MOD_MASK_SHIFT, S(KC_9), RALT(KC_3)),
+    &ko_make_basic(MOD_MASK_SHIFT, S(KC_0), RALT(KC_0)),
+    &ko_make_basic(MOD_MASK_SHIFT, OSL(_ERGOL_DEAD), KC_SLSH),
+    &ko_make_basic(MOD_MASK_SHIFT, KC_6, S(KC_M)),
+    &ko_make_basic(MOD_MASK_SHIFT, S(KC_COMM), KC_DOT),
+    &ko_make_basic(MOD_MASK_SHIFT, KC_M, KC_COMM),
+    &ko_make_basic(MOD_MASK_SHIFT, S(KC_DOT), KC_8),
+};
+
 // Mapping of led ids on the layout
 const uint16_t PROGMEM leds[MATRIX_ROWS][MATRIX_COLS] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
@@ -200,7 +219,7 @@ const uint16_t PROGMEM leds[MATRIX_ROWS][MATRIX_COLS] = LAYOUT(
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
         15,      16,     17,      18,      19,       20,                                 54,      53,      52,      51,     50,       49,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-        26,    25,      24,      23,      22,       21,       33,               67,     55,      56,      57,      58,      59,       60,
+        26,     25,      24,      23,      22,       21,       33,               67,     55,      56,      57,      58,      59,       60,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                        29,      30,     32,                        66,       64,    63
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
